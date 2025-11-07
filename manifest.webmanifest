@@ -1,0 +1,16 @@
+{
+  "name": "NoteIt",
+  "short_name": "NoteIt",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0b0e11",
+  "theme_color": "#0e1114",
+  "icons": [
+    {
+      "src": "assets/appicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

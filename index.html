@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>NoteIt</title>
+  <meta name="theme-color" content="#0e1114" />
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/appicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img class="brand-icon" src="assets/appicon.png" alt="NoteIt icon">
+      <h1>NoteIt</h1>
+    </div>
+    <div class="actions">
+      <label class="file-btn">
+        <input id="filePicker" type="file" accept="audio/*,.mp3" multiple />
+        Import from Files
+      </label>
+      <button id="installBtn" class="ghost">Add to Home Screen</button>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="now-playing card">
+      <div class="track-info">
+        <div id="trackTitle" class="title">No track selected</div>
+        <div id="trackMeta" class="meta">—</div>
+      </div>
+      <div class="controls">
+        <button id="prevBtn" aria-label="Previous">⏮</button>
+        <button id="playPauseBtn" aria-label="Play/Pause">▶️</button>
+        <button id="nextBtn" aria-label="Next">⏭</button>
+        <button id="shuffleBtn" class="toggle" aria-label="Shuffle">🔀</button>
+        <button id="repeatBtn" class="toggle" aria-label="Repeat">🔁</button>
+      </div>
+      <input type="range" id="seekBar" min="0" max="100" value="0" />
+      <div class="time">
+        <span id="currentTime">0:00</span>
+        <span id="duration">0:00</span>
+      </div>
+      <div class="vol">
+        <label for="volume">Volume</label>
+        <input type="range" id="volume" min="0" max="1" step="0.01" value="1" />
+      </div>
+    </section>
+
+    <section id="tab-library" class="tab card">
+      <div class="list-header">
+        <h2>Library</h2>
+        <div class="list-actions">
+          <button id="playAllBtn">Play All</button>
+          <button id="clearLibBtn" class="ghost">Clear</button>
+        </div>
+      </div>
+      <ul id="libraryList" class="list"></ul>
+    </section>
+
+    <section id="tab-playlists" class="tab card" hidden>
+      <div class="list-header">
+        <h2>Playlists</h2>
+        <div class="list-actions">
+          <button id="newPlaylistBtn">New Playlist</button>
+          <button id="shuffleCurrentPlBtn" class="ghost">Shuffle & Play</button>
+        </div>
+      </div>
+      <div class="playlist-switcher">
+        <select id="playlistSelect"></select>
+        <button id="deletePlaylistBtn" class="ghost">Delete</button>
+      </div>
+      <ul id="playlistTracks" class="list"></ul>
+    </section>
+
+    <section id="tab-about" class="tab card" hidden>
+      <h2>About NoteIt</h2>
+      <p><strong>NoteIt</strong> is a simple, private, and completely <strong>free</strong> local music player for iPhone.
+      Import your MP3 files from the Files app, create playlists, and listen offline—no accounts, no ads, and no data collection.</p>
+      <p>If you enjoy NoteIt, you can support development via Cash App at <strong>$gringinoir</strong> —
+      either as a small thank-you or to request a feature (suggested <strong>$5+</strong> for feature requests).</p>
+    </section>
+  </main>
+
+  <nav class="tabs">
+    <button data-tab="tab-library" class="active">Library</button>
+    <button data-tab="tab-playlists">Playlists</button>
+    <button data-tab="tab-about">About</button>
+  </nav>
+
+  <audio id="audio"></audio>
+  <script src="app.js"></script>
+</body>
+</html>
