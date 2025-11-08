@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>NoteIt</title>
 <meta name="theme-color" content="#0e1114">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon-180.png">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="safe-top"></div>
 <header class="topbar">
-  <div class="brand"><img class="brand-icon" src="assets/apple-touch-icon.png" alt="NoteIt icon"><h1>NoteIt</h1></div>
-  <div class="actions"><label class="file-btn"><input id="filePicker" type="file" accept="audio/*,.mp3" multiple>Import from Files</label></div>
+  <div class="brand"><img class="brand-icon" src="assets/apple-touch-icon-180.png" alt="icon"><h1>NoteIt</h1></div>
+  <div class="actions">
+    <label class="file-btn"><input id="filePicker" type="file" accept="audio/*,.mp3" multiple>Import from Files</label>
+  </div>
 </header>
 <main class="content">
   <section class="now-playing card">
-    <div class="track-info"><div id="trackTitle" class="title">No track selected</div><div id="trackMeta" class="meta"></div></div>
+    <div class="track-info"><div id="trackTitle" class="title">No track selected</div><div id="trackMeta" class="meta">—</div></div>
     <div class="controls"><button id="prevBtn">⏮</button><button id="playPauseBtn">▶️</button><button id="nextBtn">⏭</button><button id="shuffleBtn" class="toggle">🔀</button><button id="repeatBtn" class="toggle">🔁</button></div>
-    <input type="range" id="seekBar" min="0" max="100" value="0">
-    <div class="time"><span id="currentTime">0:00</span><span id="duration">0:00</span></div>
+    <input type="range" id="seekBar" min="0" max="100" value="0"><div class="time"><span id="currentTime">0:00</span><span id="duration">0:00</span></div>
     <div class="vol"><label for="volume">Volume</label><input type="range" id="volume" min="0" max="1" step="0.01" value="1"></div>
   </section>
   <section id="tab-library" class="tab card">
@@ -32,23 +30,18 @@
     <ul id="libraryList" class="list"></ul>
   </section>
   <section id="tab-playlists" class="tab card" hidden>
-    <div class="list-header"><h2>Playlists</h2><div class="list-actions"><button id="newPlaylistBtn">New Playlist</button></div></div>
-    <ul id="playlistList" class="list"></ul>
-    <div id="playlistDetail" class="card" hidden>
-      <div class="list-header"><h3 id="plTitle">Playlist</h3><div class="list-actions"><button id="shuffleCurrentPlBtn">Shuffle & Play</button><button id="deletePlaylistBtn" class="ghost">Delete</button></div></div>
-      <ul id="playlistTracks" class="list"></ul>
-      <button id="backToPlaylists" class="ghost">Back to Playlists</button>
-    </div>
+    <div class="list-header"><h2>Playlists</h2><div class="list-actions"><button id="newPlaylistBtn">New Playlist</button><button id="shuffleCurrentPlBtn" class="ghost">Shuffle & Play</button></div></div>
+    <div class="playlist-switcher"><select id="playlistSelect"></select><button id="deletePlaylistBtn" class="ghost">Delete</button></div>
+    <ul id="playlistTracks" class="list"></ul>
   </section>
   <section id="tab-about" class="tab card" hidden>
     <h2>About NoteIt</h2>
     <p><strong>NoteIt</strong> is a simple, private, and completely <strong>free</strong> local music player for iPhone. Import MP3s from the Files app, create playlists, and listen offline—no accounts, no ads, and no data collection.</p>
     <div class="a2hs-box"><h3>Add NoteIt to your Home Screen</h3><ol><li>Open this page in <strong>Safari</strong>.</li><li>Tap the <strong>Share</strong> icon.</li><li>Choose <strong>Add to Home Screen</strong>.</li><li>Tap <strong>Add</strong>.</li></ol><p><em>If you previously installed NoteIt, remove the old icon first to update.</em></p></div>
-    <h3>Support</h3><p>Donate via Cash App at <strong>$gringinoir</strong> (suggested <strong>$5+</strong> for feature requests). ❤️</p>
+    <h3>Support</h3><p>NoteIt is free. To support or request a feature, donate via Cash App at <strong>$gringinoir</strong> (suggested <strong>$5+</strong> for feature requests). ❤️</p>
   </section>
 </main>
 <nav class="tabs"><button data-tab="tab-library" class="active">Library</button><button data-tab="tab-playlists">Playlists</button><button data-tab="tab-about">About</button></nav>
 <audio id="audio"></audio>
 <script src="app.js"></script>
-</body>
-</html>
+</body></html>
