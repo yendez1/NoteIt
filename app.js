@@ -29,6 +29,32 @@ function loadTrack(t){audio.src=t.url;trackTitle.textContent=t.name;trackMeta.te
 function renderLibrary(){libraryList.innerHTML='';LIBRARY.forEach((t,i)=>{const li=document.createElement('li');li.className='playable';li.dataset.play=i;li.innerHTML=`<div class="title"><span class="badge">MP3</span> ${t.name}</div><div class="row-btns"><button data-add="${i}">＋ Playlist</button></div>`;libraryList.appendChild(li);});}
 function renderPlaylistUI(){if(!playlistSelect) return;playlistSelect.innerHTML='';PLAYLISTS.forEach((p,i)=>{const o=document.createElement('option');o.value=i;o.textContent=p.name;playlistSelect.appendChild(o);}); renderPlaylistTracks();}
 function renderPlaylistTracks(){if(!playlistTracks) return;const idx=Number(playlistSelect.value||0);const pl=PLAYLISTS[idx]||{tracks:[]};playlistTracks.innerHTML='';pl.tracks.forEach((t,i)=>{const li=document.createElement('li');li.innerHTML=`<div class="title">${t.name}</div><div class="row-btns"><button data-playpl="${i}">Play</button><button data-delpl="${i}">Remove</button></div>`;playlistTracks.appendChild(li);});}
+function renderPlaylists(){
+  playlistList.innerHTML = '';
+  PLAYLISTS.forEach((pl, idx) => {
+    const li = document.createElement('li');
+    li.className = 'playable';
+    li.dataset.open = idx;
+    li.innerHTML = `<div class="title"><span class="badge">PL</span> ${pl.name}
+                    <span style="color:#a7b1bd">(${pl.tracks.length})</span></div>`;
+    playlistList.appendChild(li);
+  });
+}
+
+playlistList.addEventListener('click', e => {
+  const li = e.target.closest('li.playable');
+  if(!li) return;
+  activePlaylistIndex = Number(li.dataset.open);
+  renderPlaylistTracks();
+  playlistDetail.hidden = false;   // show tracks view
+  playlistList.hidden = true;
+});
+
+backToPlaylists.addEventListener('click', () => {
+  playlistDetail.hidden = true;
+  playlistList.hidden = false;
+});
+
 document.addEventListener('DOMContentLoaded',async()=>{db=await openDB();const rows=await getAllTracks();LIBRARY=rows.map(r=>({id:r.id,name:r.name,url:URL.createObjectURL(r.blob)}));renderLibrary();renderPlaylistUI();setShuffle(shuffleOn);setRepeat(repeatOn);});
 filePicker.addEventListener('change',async e=>{const files=Array.from(e.target.files||[]).filter(f=>f.type.startsWith('audio')||f.name.toLowerCase().endsWith('.mp3'));for(const f of files){const buf=await f.arrayBuffer();const blob=new Blob([buf],{type:f.type||'audio/mpeg'});const id=await addTrack(blob,f.name);const url=URL.createObjectURL(blob);LIBRARY.push({id,name:f.name,url});}renderLibrary();});
 libraryList.addEventListener('click', e => {
