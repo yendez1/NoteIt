@@ -3,7 +3,27 @@
 .topbar{background:#12161b;border-bottom:1px solid var(--outline);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
 .brand{display:flex;align-items:center;gap:12px}
 .actions{display:flex;gap:10px}.file-btn{background:var(--accent-2);color:#04131f;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer}.file-btn input{display:none}
-.content{max-width:980px;margin:12px auto 80px;padding:0 14px}.card{background:#12161b;border:1px solid var(--outline);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:14px}
+/* Make room so content never sits under the fixed tab bar */
+.content{
+  max-width: 980px;
+  margin: 12px auto 0;
+  padding: 0 14px;
+  padding-bottom: calc(96px + env(safe-area-inset-bottom)); /* <— key line */
+}
+
+/* Tabs fixed to true bottom with safe-area insets */
+.tabs{
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 20;
+  display: flex; justify-content: space-around;
+  border-top: 1px solid var(--outline);
+  background: linear-gradient(0deg,#0b0f14,#12161b);
+  padding: 10px calc(env(safe-area-inset-right))
+           calc(10px + env(safe-area-inset-bottom))
+           calc(env(safe-area-inset-left));
+}
+
 .controls{display:flex;gap:10px;margin:10px 0}.toggle.active{outline:2px solid var(--accent);background:#15202b}
 #seekBar{width:100%}.time{display:flex;justify-content:space-between;color:var(--muted)}
 .list{list-style:none;padding:0;margin:0}.list li{display:flex;align-items:center;justify-content:space-between;padding:12px 10px;border-bottom:1px solid #18222d;gap:12px}.list li:last-child{border-bottom:none}
@@ -11,7 +31,7 @@
 .list .row-btns{display:flex;gap:8px}.list li.playable{cursor:pointer}.list li.playable:hover{background:#0f141a}
 .list-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.list-actions{display:flex;gap:8px;flex-wrap:wrap}
 .a2hs-box{border:1px solid #233042;background:#0f141a;border-radius:12px;padding:12px;margin-top:8px}
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:space-around;border-top:1px solid var(--outline);background:#10161f;padding:10px}
+
 .tabs button{flex:1;padding:10px;border-radius:10px;background:#11171f;color:var(--muted)}.tabs button.active{color:var(--text);outline:2px solid #213042}
 button{background:#18202a;color:var(--text);border:1px solid var(--outline);padding:10px 12px;border-radius:10px;cursor:pointer}button.ghost{background:var(--ghost);color:var(--muted)}
 /* Sit content below the notch in standalone mode */
