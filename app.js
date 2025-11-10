@@ -3,6 +3,13 @@ function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open(DB,1);r.
 function addTrack(blob,name){return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readwrite');const s=tx.objectStore(STORE);const it={name,blob,addedAt:Date.now()};const r=s.add(it);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
 function getAllTracks(){return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readonly');const s=tx.objectStore(STORE);const r=s.getAll();r.onsuccess=()=>res(r.result||[]);r.onerror=()=>rej(r.error);});}
 function clearDB(){return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readwrite');const s=tx.objectStore(STORE);const r=s.clear();r.onsuccess=()=>res();r.onerror=()=>rej(r.error);});}
+function markPlayingInLibrary(t){
+  document.querySelectorAll('#libraryList li').forEach(li => li.classList.remove('playing'));
+  if(!t) return;
+  const found = [...document.querySelectorAll('#libraryList li')]
+    .find(li => LIBRARY[Number(li.dataset.play)]?.url === t.url);
+  if(found) found.classList.add('playing');
+}
 const audio=document.getElementById('audio'), filePicker=document.getElementById('filePicker'), libraryList=document.getElementById('libraryList');
 const trackTitle=document.getElementById('trackTitle'), trackMeta=document.getElementById('trackMeta');
 const playPauseBtn=document.getElementById('playPauseBtn'), nextBtn=document.getElementById('nextBtn'), prevBtn=document.getElementById('prevBtn');
@@ -18,7 +25,7 @@ const fmt=s=>{s=Math.floor(s||0);const m=Math.floor(s/60);const sec=String(s%60)
 function setShuffle(v){shuffleOn=v;localStorage.setItem('noteit.shuffle',JSON.stringify(v));shuffleBtn.classList.toggle('active',v);} function setRepeat(v){repeatOn=v;localStorage.setItem('noteit.repeat',JSON.stringify(v));repeatBtn.classList.toggle('active',v);}
 function savePlaylists(){localStorage.setItem('noteit.playlists',JSON.stringify(PLAYLISTS));}
 function shuffleArr(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function loadTrack(t){audio.src=t.url;trackTitle.textContent=t.name;trackMeta.textContent='Local file';audio.play().catch(()=>{});playPauseBtn.textContent='⏸️';}
+function loadTrack(t){audio.src=t.url;trackTitle.textContent=t.name;trackMeta.textContent='';audio.play().catch(()=>{});playPauseBtn.textContent='⏸️'; markPlayingInLibrary(t);}
 function renderLibrary(){libraryList.innerHTML='';LIBRARY.forEach((t,i)=>{const li=document.createElement('li');li.className='playable';li.dataset.play=i;li.innerHTML=`<div class="title"><span class="badge">MP3</span> ${t.name}</div><div class="row-btns"><button data-add="${i}">＋ Playlist</button></div>`;libraryList.appendChild(li);});}
 function renderPlaylistUI(){if(!playlistSelect) return;playlistSelect.innerHTML='';PLAYLISTS.forEach((p,i)=>{const o=document.createElement('option');o.value=i;o.textContent=p.name;playlistSelect.appendChild(o);}); renderPlaylistTracks();}
 function renderPlaylistTracks(){if(!playlistTracks) return;const idx=Number(playlistSelect.value||0);const pl=PLAYLISTS[idx]||{tracks:[]};playlistTracks.innerHTML='';pl.tracks.forEach((t,i)=>{const li=document.createElement('li');li.innerHTML=`<div class="title">${t.name}</div><div class="row-btns"><button data-playpl="${i}">Play</button><button data-delpl="${i}">Remove</button></div>`;playlistTracks.appendChild(li);});}
