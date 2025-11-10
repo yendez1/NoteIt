@@ -1,7 +1,7 @@
 :root{--bg:#0b0e11;--bg-elev:#12161b;--text:#eef2f6;--muted:#a7b1bd;--accent:#8fd3ff;--accent-2:#6bb7ea;--outline:#1f2630;--ghost:#1a2028;--radius:14px;--shadow:0 10px 30px rgba(0,0,0,.45)}
 *{box-sizing:border-box}body{margin:0;background:#0b0e11;color:var(--text);font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial}
 .topbar{background:#12161b;border-bottom:1px solid var(--outline);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
-.brand{display:flex;align-items:center;gap:12px}.brand-icon{width:28px;height:28px;border-radius:6px}
+.brand{display:flex;align-items:center;gap:12px}
 .actions{display:flex;gap:10px}.file-btn{background:var(--accent-2);color:#04131f;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer}.file-btn input{display:none}
 .content{max-width:980px;margin:12px auto 80px;padding:0 14px}.card{background:#12161b;border:1px solid var(--outline);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:14px}
 .controls{display:flex;gap:10px;margin:10px 0}.toggle.active{outline:2px solid var(--accent);background:#15202b}
@@ -24,4 +24,8 @@ button{background:#18202a;color:var(--text);border:1px solid var(--outline);padd
 .topbar{
   padding-top: calc(10px + env(safe-area-inset-top));
 }
+
+.topbar h1{ font-size: 1.9rem; line-height: 1; margin: 0; }
+.brand-icon{ height: 1.9rem; width: auto; border-radius: 8px; }
+
 
