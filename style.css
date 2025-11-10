@@ -14,3 +14,14 @@
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:space-around;border-top:1px solid var(--outline);background:#10161f;padding:10px}
 .tabs button{flex:1;padding:10px;border-radius:10px;background:#11171f;color:var(--muted)}.tabs button.active{color:var(--text);outline:2px solid #213042}
 button{background:#18202a;color:var(--text);border:1px solid var(--outline);padding:10px 12px;border-radius:10px;cursor:pointer}button.ghost{background:var(--ghost);color:var(--muted)}
+/* Sit content below the notch in standalone mode */
+.safe-top{
+  height: env(safe-area-inset-top);
+  background: transparent;
+}
+
+/* Extra insurance: topbar never overlaps the notch */
+.topbar{
+  padding-top: calc(10px + env(safe-area-inset-top));
+}
+
