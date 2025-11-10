@@ -34,10 +34,26 @@
     <ul id="libraryList" class="list"></ul>
   </section>
   <section id="tab-playlists" class="tab card" hidden>
-    <div class="list-header"><h2>Playlists</h2><div class="list-actions"><button id="newPlaylistBtn">New Playlist</button><button id="shuffleCurrentPlBtn" class="ghost">Shuffle & Play</button></div></div>
-    <div class="playlist-switcher"><select id="playlistSelect"></select><button id="deletePlaylistBtn" class="ghost">Delete</button></div>
+  <div class="list-header">
+    <h2>Playlists</h2>
+    <div class="list-actions"><button id="newPlaylistBtn">New Playlist</button></div>
+  </div>
+
+  <ul id="playlistList" class="list"></ul>     <!-- list of playlists -->
+
+  <div id="playlistDetail" class="card" hidden>
+    <div class="list-header">
+      <h3 id="plTitle">Playlist</h3>
+      <div class="list-actions">
+        <button id="shuffleCurrentPlBtn">Shuffle & Play</button>
+        <button id="deletePlaylistBtn" class="ghost">Delete</button>
+      </div>
+    </div>
     <ul id="playlistTracks" class="list"></ul>
-  </section>
+    <button id="backToPlaylists" class="ghost">Back to Playlists</button>
+  </div>
+</section>
+
   <section id="tab-about" class="tab card" hidden>
     <h2>About NoteIt</h2>
     <p><strong>NoteIt</strong> is a simple, private, and completely <strong>free</strong> local music player for iPhone. Import MP3s from the Files app, create playlists, and listen offline—no accounts, no ads, and no data collection.</p>
