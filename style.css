@@ -28,4 +28,11 @@ button{background:#18202a;color:var(--text);border:1px solid var(--outline);padd
 .topbar h1{ font-size: 1.9rem; line-height: 1; margin: 0; }
 .brand-icon{ height: 1.9rem; width: auto; border-radius: 8px; }
 
+/* Row highlight for the current song */
+.list li.playing{
+  background: #0f1d29 !important;
+  outline: 2px solid #1d2a38;
+}
+
+
 
